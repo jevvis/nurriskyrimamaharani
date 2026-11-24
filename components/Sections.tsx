@@ -747,7 +747,7 @@ export function AboutSection() {
               <img src="/profile.png" alt="Nurrisky Rima Maharani" className="w-24 h-24 rounded-full object-cover object-top border-[3px] border-[var(--card-border)] bg-[var(--card-bg)] shrink-0 shadow-lg" />
               <div>
                 <div className="flex items-center gap-2 mb-3">
-                  <h3 className="text-xl md:text-2xl font-bold tracking-wide">NURRISKY RIMA MAHARANI</h3>
+                  <h3 className="text-xl md:text-2xl font-bold tracking-wide">NURRISKY RIMA MAHARANI, S.M., S.H.</h3>
                   <svg width="20" height="20" viewBox="0 0 24 24" className="text-emerald-500 fill-current">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
                   </svg>
@@ -955,7 +955,7 @@ export function EducationSection() {
     gpaLabel: t('education.gpa.label'),
     status: t(`education.${n}.status`),
     description: t(`education.${n}.desc`),
-    images: n === 2 ? ['/galeri/edu-2-1.jpg', '/galeri/edu-2-2.jpg'] : ([] as string[]),
+    images: n === 2 ? ['/galeri/edu-2-1.jpg', '/galeri/edu-2-2.jpg'] : ['/galeri/edu-1-1.jpg', '/galeri/edu-1-2.jpg'],
     imageTag: t(`education.${n}.tag`),
     imageCaption: t(`education.${n}.caption`),
     uni: t(`education.${n}.uni`),
@@ -1136,7 +1136,7 @@ export function AwardsSection() {
 
   const certificationsList = Array.from({ length: 3 }, (_, i) => ({
     id: i + 1,
-    image: (i < 2 ? `/galeri/cert-${i + 1}.jpg` : undefined) as string | undefined,
+    image: `/galeri/cert-${i + 1}.jpg` as string | undefined,
     file: undefined as string | undefined,
   })).map((c) => ({
     ...c,

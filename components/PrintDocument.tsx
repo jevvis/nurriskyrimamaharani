@@ -101,7 +101,7 @@ export default function PrintDocument() {
           <img src="/profile.png" alt="" style={{ position: 'absolute', left: '50%', bottom: '3mm', transform: 'translateX(-50%)', height: '128mm', width: 'auto' }} />
           <div style={{ position: 'absolute', left: 0, bottom: '9mm', width: '84mm' }}>
             <p style={{ fontSize: '11pt', color: '#bdbdbd' }}>{t('hero.hey')}</p>
-            <p style={{ fontFamily: OSW, fontSize: '30pt', fontWeight: 700, lineHeight: 1.02, textTransform: 'uppercase', marginTop: 2 }}>Nurrisky<br />Rima Maharani</p>
+            <p style={{ fontFamily: OSW, fontSize: '30pt', fontWeight: 700, lineHeight: 1.02, textTransform: 'uppercase', marginTop: 2 }}>Nurrisky<br />Rima Maharani<span style={{ display: 'block', fontSize: '14pt', letterSpacing: '0.08em', marginTop: 4 }}>S.M., S.H.</span></p>
             <p style={{ fontSize: '9.6pt', lineHeight: 1.5, marginTop: 8, maxWidth: '78mm', color: '#e5e5e5' }}>{t('hero.tagline')}</p>
           </div>
           <div style={{ position: 'absolute', right: 0, bottom: '9mm', width: '78mm', textAlign: 'right' }}>
@@ -261,10 +261,15 @@ export default function PrintDocument() {
           ))}
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8mm', marginTop: '7mm' }}>
-          <div style={{ background: INK, color: '#fff', borderRadius: '5mm', padding: '5mm 6mm' }}>
-            <p style={{ fontSize: 7, letterSpacing: '0.16em', fontWeight: 800, color: EMB }}>{t('award.3.cat')} · {t('award.3.year')}</p>
-            <h3 style={{ fontSize: '11pt', fontWeight: 800, lineHeight: 1.2, marginTop: 3 }}>{t('award.3.title')}</h3>
-            <p style={{ fontSize: '8.4pt', color: '#a7f3d0', marginTop: 2 }}>{t('award.3.issuer')}</p>
+          <div style={{ background: INK, color: '#fff', borderRadius: '5mm', padding: '4mm 5mm', display: 'flex', gap: '5mm', alignItems: 'center' }}>
+            <div style={{ width: '34mm', flex: 'none', background: '#fff', padding: '1mm', borderRadius: '1.5mm' }}>
+              <Photo src="/galeri/cert-3.jpg" h="24mm" fit="contain" style={{ background: '#fff' }} />
+            </div>
+            <div>
+              <p style={{ fontSize: 7, letterSpacing: '0.16em', fontWeight: 800, color: EMB }}>{t('award.3.cat')} · {t('award.3.year')}</p>
+              <h3 style={{ fontSize: '11pt', fontWeight: 800, lineHeight: 1.2, marginTop: 3 }}>{t('award.3.title')}</h3>
+              <p style={{ fontSize: '8.4pt', color: '#a7f3d0', marginTop: 2 }}>{t('award.3.issuer')}</p>
+            </div>
           </div>
           <div style={{ background: EM, color: INK, borderRadius: '5mm', padding: '5mm 6mm' }}>
             <p style={{ fontSize: 7, letterSpacing: '0.16em', fontWeight: 800 }}>{t('proj.1.period')} · {t('proj.1.sub')}</p>

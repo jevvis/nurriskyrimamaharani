@@ -24,3 +24,11 @@ Judul "Terorganisir. Ramah. Bertanggung Jawab.", kutipan, 4 karakter kerja, bida
 
 ## Ketidaksesuaian
 Lihat laporan akhir.
+
+## Pembaruan 24 Nov 2026 (jawaban klien + berkas baru)
+- Gelar "S.M., S.H." dicantumkan (diizinkan klien; tertulis di papan bunga wisuda) di hero, kartu Tentang, dan sampul PDF.
+- CUMLAUDE dinyatakan klien untuk S1 Manajemen UII: ditambahkan sebagai sorotan di entri S1 Manajemen.
+- Entri S1 Manajemen kini punya 2 foto: yudisium UII (IMG_5700) dan papan bunga wisuda (IMG_5500). IMG_5701 (ada orang lain di panggung) tidak dipakai.
+- Sertifikat Pelatihan Wirausaha Pemula Angkatan-III (22–26 Juli 2024) dipasang sebagai kartu ke-3 (bagian sertifikat saja; lembar kurikulum tidak dipakai); NIP pejabat diburamkan. Tanggal diperbaiki dari 23 menjadi 22 Juli sesuai sertifikat.
+- LinkedIn: klien mengizinkan, tetapi tautan belum diberikan, jadi belum dipasang.
+- Tidak ada foto kerja/magang/profil tambahan (tetap).

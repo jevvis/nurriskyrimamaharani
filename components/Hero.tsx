@@ -54,14 +54,14 @@ export default function Hero() {
       {/* Sapaan + nama + tagline (kiri) */}
       <div className="hero-anim absolute left-[4vw] lg:left-[6vw] top-[47%] 2xl:left-auto 2xl:right-1/2 2xl:mr-[360px] 2xl:top-[50%] 2xl:w-[300px] z-20 hidden md:block max-w-[250px] lg:max-w-[300px] pointer-events-none" style={{ '--d': '1000ms' } as React.CSSProperties}>
         <p className="font-script text-3xl lg:text-4xl font-bold text-emerald-600 dark:text-emerald-400 -rotate-3 leading-none mb-1">{t('hero.hey')}</p>
-        <h1 className="text-2xl lg:text-4xl font-bold tracking-tight text-[var(--foreground)] leading-[1.05]">Nurrisky Rima Maharani</h1>
+        <h1 className="text-2xl lg:text-4xl font-bold tracking-tight text-[var(--foreground)] leading-[1.05]">Nurrisky Rima Maharani<span className="block text-base lg:text-xl font-semibold text-emerald-600 dark:text-emerald-400 mt-1">S.M., S.H.</span></h1>
         <p className="mt-3 text-xs lg:text-[13px] leading-relaxed text-[var(--muted)]">{t('hero.tagline')}</p>
       </div>
 
       {/* Versi HP: sapaan + nama di antara kata besar dan kepala foto */}
       <div className="hero-anim absolute inset-x-0 top-[calc(11svh+8.5rem)] z-20 md:hidden text-center pointer-events-none px-4" style={{ '--d': '1000ms' } as React.CSSProperties}>
         <p className="font-script text-2xl font-bold text-emerald-600 dark:text-emerald-400 leading-none">{t('hero.hey')}</p>
-        <h1 className="text-2xl font-bold tracking-tight text-[var(--foreground)]">Nurrisky Rima Maharani</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-[var(--foreground)]">Nurrisky Rima Maharani, S.M., S.H.</h1>
       </div>
 
       {/* Keterangan kecil kiri-bawah */}
