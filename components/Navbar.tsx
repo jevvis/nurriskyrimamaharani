@@ -122,16 +122,16 @@ export default function Navbar() {
           </button>
 
           <ThemeToggle />
-          <button
-            type="button"
-            onClick={() => window.print()}
+          <a
+            href={`/Portofolio-Nurrisky-Rima-Maharani-${lang.toUpperCase()}.pdf`}
+            download
             className="no-print flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full border border-[var(--card-border)] bg-[var(--card-bg)] hover:border-emerald-500/50 hover:bg-emerald-500/5 transition-all text-[10px] font-bold tracking-widest text-[var(--foreground)]"
             title={t('nav.pdf.title')}
             aria-label={t('nav.pdf.title')}
           >
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" /></svg>
             <span className="hidden sm:inline">{t('nav.pdf')}</span>
-          </button>
+          </a>
           <a
             href="/#contact"
             onClick={(e) => handleNavClick(e, '/#contact')}

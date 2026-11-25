@@ -7,7 +7,7 @@ import { siteData } from '@/lib/data'
 /**
  * Versi cetak / PDF (tombol "PDF" di header). Hanya tampil saat mencetak (@media print di globals.css);
  * di layar disembunyikan sehingga tampilan situs tidak berubah.
- * 8 halaman A4 lanskap dengan irama visual: halaman gelap, hijau penuh, foto, motif gelombang dari situs,
+ * 9 halaman A4 lanskap dengan irama visual: halaman gelap, hijau penuh, foto, motif gelombang dari situs,
  * dan huruf Oswald raksasa. Isi dari kamus yang sama dengan situs.
  */
 const INK = '#0a0a0a'
@@ -20,8 +20,15 @@ const G = '#059669'
 const MUTED = '#5c5c5c'
 const OSW = 'var(--font-oswald), Impact, sans-serif'
 
-const TOTAL = 8
+const TOTAL = 9
 const PH = '209.6mm' // tinggi halaman
+
+// foto halaman Pendidikan: [berkas, lebar/tinggi]
+const EDU_H = 129 // tinggi foto (mm)
+const EDU_PHOTOS: [string, number][][] = [
+  [['/galeri/pdf-edu-1-1.jpg', 0.5613], ['/galeri/pdf-edu-1-2.jpg', 0.8265], ['/galeri/pdf-edu-1-3.jpg', 0.5629]],
+  [['/galeri/pdf-edu-2-1.jpg', 0.6665], ['/galeri/pdf-edu-2-2.jpg', 0.6665], ['/galeri/pdf-edu-2-3.jpg', 0.6665]],
+]
 
 function Waves({ c, o }: { c: string; o: number }) {
   return (
@@ -156,35 +163,39 @@ export default function PrintDocument() {
         </div>
       </Page>
 
-      {/* 3. Pendidikan (foto wisuda + 2 program) */}
-      <Page n={3} bg={INK} color="#fff" waves={{ c: EM, o: 0.14 }} footer="#8a8a8a">
-        <Bleed x="-14mm" w="108mm" style={{ background: '#111' }}>
-          <Photo src="/galeri/edu-2-1.jpg" h="100%" pos="center 22%" style={{ position: 'absolute', inset: 0 }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(10,10,10,0) 62%, rgba(10,10,10,.95) 100%)' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(10,10,10,0) 72%, rgba(10,10,10,.85) 100%)' }} />
-        </Bleed>
-        <div style={{ position: 'relative', marginLeft: '102mm' }}>
-          <Label c={EMB}>{t('education.label')}</Label>
-          <h2 style={{ fontFamily: OSW, fontSize: '30pt', fontWeight: 700, lineHeight: 1.02, textTransform: 'uppercase', marginTop: 3 }}>{t('education.title')}</h2>
-          {[1, 2].map((i) => (
-            <div key={i} style={{ borderTop: `0.6mm solid ${EM}`, marginTop: '8mm', paddingTop: '5mm', display: 'grid', gridTemplateColumns: '24mm 1fr', gap: '5mm' }}>
-              <Outline size="46pt" color={EMB}>{String(i).padStart(2, '0')}</Outline>
-              <div>
-                <p style={{ fontFamily: OSW, fontSize: '19pt', fontWeight: 600, color: EMB, lineHeight: 1 }}>{dash(t(`education.${i}.period`))}  ·  <span style={{ color: '#fff' }}>{t('education.gpa.label')} {t(`education.${i}.gpa`)}</span></p>
-                <h3 style={{ fontFamily: OSW, fontSize: '18pt', fontWeight: 700, lineHeight: 1.05, textTransform: 'uppercase', marginTop: 7 }}>{t(`education.${i}.institution`)}</h3>
-                <p style={{ fontSize: '12pt', fontWeight: 700, color: '#d1fae5', marginTop: 4 }}>{t(`education.${i}.program`)}</p>
-                <p style={{ fontSize: '9.4pt', lineHeight: 1.5, marginTop: 6, color: '#e5e5e5' }}>{t(`education.${i}.desc`)}</p>
-                <ul style={{ marginTop: 6, paddingLeft: 12, fontSize: '9pt', lineHeight: 1.45, listStyle: 'square', color: '#d4d4d4' }}>
-                  {[1, 2, 3, 4].map((h) => (t(`education.${i}.h${h}`) ? <li key={h} style={{ marginBottom: 2 }}>{t(`education.${i}.h${h}`)}</li> : null))}
-                </ul>
+      {/* 3–4. Pendidikan: satu halaman per program S1, semua foto utuh (rasio asli) */}
+      {EDU_PHOTOS.map((photos, idx) => {
+        const i = idx + 1
+        return (
+          <Page key={i} n={2 + i} bg={i === 1 ? INK : `linear-gradient(160deg, ${EMD} 0%, ${EMX} 100%)`} color="#fff" waves={{ c: i === 1 ? EM : '#6ee7b7', o: 0.14 }} footer={i === 1 ? '#8a8a8a' : '#6ee7b7'}>
+            <div style={{ position: 'relative', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '30mm 104mm 1fr', gap: '6mm', alignItems: 'start' }}>
+                <Outline size="64pt" color={EMB}>{String(i).padStart(2, '0')}</Outline>
+                <div>
+                  <Label c={EMB}>{t('education.title')} · {t('education.label')}</Label>
+                  <h3 style={{ fontFamily: OSW, fontSize: '23pt', fontWeight: 700, lineHeight: 1.05, textTransform: 'uppercase', marginTop: 5 }}>{t(`education.${i}.institution`)}</h3>
+                  <p style={{ fontSize: '12.5pt', fontWeight: 700, color: '#d1fae5', marginTop: 5 }}>{t(`education.${i}.program`)}</p>
+                  <p style={{ fontFamily: OSW, fontSize: '15pt', fontWeight: 600, color: EMB, marginTop: 5 }}>{dash(t(`education.${i}.period`))}  ·  <span style={{ color: '#fff' }}>{t('education.gpa.label')} {t(`education.${i}.gpa`)}</span></p>
+                </div>
+                <div style={{ borderTop: `0.6mm solid ${EM}`, paddingTop: '4mm' }}>
+                  <p style={{ fontSize: '9.4pt', lineHeight: 1.5, color: '#f0f0f0' }}>{t(`education.${i}.desc`)}</p>
+                  <ul style={{ marginTop: 6, paddingLeft: 12, fontSize: '9pt', lineHeight: 1.45, listStyle: 'square', color: '#e5e5e5' }}>
+                    {[1, 2, 3, 4].map((h) => (t(`education.${i}.h${h}`) ? <li key={h} style={{ marginBottom: 2 }}>{t(`education.${i}.h${h}`)}</li> : null))}
+                  </ul>
+                </div>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '5mm' }}>
+                {photos.map(([src, ratio]) => (
+                  <Photo key={src} src={src} w={`${(EDU_H * ratio).toFixed(2)}mm`} h={`${EDU_H}mm`} style={{ borderRadius: '4mm', border: `0.5mm solid ${EM}`, flex: 'none' }} />
+                ))}
               </div>
             </div>
-          ))}
-        </div>
-      </Page>
+          </Page>
+        )
+      })}
 
-      {/* 4. Pengalaman: toko kue */}
-      <Page n={4} bg={PAPER} waves={{ c: '#0a0a0a', o: 0.07 }}>
+      {/* 5. Pengalaman: toko kue */}
+      <Page n={5} bg={PAPER} waves={{ c: '#0a0a0a', o: 0.07 }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 120mm', gap: '10mm', height: '100%' }}>
           <div>
             <Label>{t('work.label')}</Label>
@@ -208,8 +219,8 @@ export default function PrintDocument() {
         </div>
       </Page>
 
-      {/* 5. Pengalaman: magang + pelatihan */}
-      <Page n={5} bg={`linear-gradient(160deg, ${EMD} 0%, ${EMX} 100%)`} color="#fff" waves={{ c: '#6ee7b7', o: 0.14 }} footer="#6ee7b7">
+      {/* 6. Pengalaman: magang + pelatihan */}
+      <Page n={6} bg={`linear-gradient(160deg, ${EMD} 0%, ${EMX} 100%)`} color="#fff" waves={{ c: '#6ee7b7', o: 0.14 }} footer="#6ee7b7">
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10mm', height: '100%', zoom: 1.08 } as CSSProperties}>
           <div>
             <Label c={EMB}>{t('work.label')}</Label>
@@ -237,8 +248,8 @@ export default function PrintDocument() {
         </div>
       </Page>
 
-      {/* 6. Sertifikat + prestasi */}
-      <Page n={6} bg={PAPER} waves={{ c: '#0a0a0a', o: 0.06 }}>
+      {/* 7. Sertifikat + prestasi */}
+      <Page n={7} bg={PAPER} waves={{ c: '#0a0a0a', o: 0.06 }}>
         <div style={{ zoom: 1.2 } as CSSProperties}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <div>
@@ -280,8 +291,8 @@ export default function PrintDocument() {
         </div>
       </Page>
 
-      {/* 7. Kemampuan */}
-      <Page n={7} bg={PAPER} waves={{ c: '#0a0a0a', o: 0.05 }}>
+      {/* 8. Kemampuan */}
+      <Page n={8} bg={PAPER} waves={{ c: '#0a0a0a', o: 0.05 }}>
         <div style={{ display: 'grid', gridTemplateColumns: '124mm 1fr', gap: '12mm', height: '100%', zoom: 1.22 } as CSSProperties}>
           <div style={{ background: INK, color: '#fff', borderRadius: '6mm', padding: '9mm', alignSelf: 'start' }}>
             <Label c={EMB}>{t('skills.label')}</Label>
@@ -322,8 +333,8 @@ export default function PrintDocument() {
         </div>
       </Page>
 
-      {/* 8. Kontak */}
-      <Page n={8} bg={INK} color="#fff" waves={{ c: EM, o: 0.18 }} footer="#8a8a8a">
+      {/* 9. Kontak */}
+      <Page n={9} bg={INK} color="#fff" waves={{ c: EM, o: 0.18 }} footer="#8a8a8a">
         <div style={{ position: 'absolute', right: '-10mm', bottom: '-34mm', width: '150mm', height: '150mm', borderRadius: '50%', background: 'radial-gradient(circle, rgba(16,185,129,.6) 0%, rgba(16,185,129,.16) 50%, rgba(16,185,129,0) 70%)' }} />
         <div style={{ position: 'relative', height: '100%' }}>
           <Label c={EMB}>{t('contact.label')}</Label>
